@@ -72,7 +72,7 @@ func LoginUser(user models.User) (string, error) {
 	}
 
 	// Generate JWT token
-	token, err := utils.GenerateJWT(dbUser.Email)
+	token, err := utils.GenerateJWT(dbUser.Email, dbUser.ID.Hex())
 	if err != nil {
 		log.Println("Failed to generate JWT token:", err)
 		return "", errors.New("failed to generate token")

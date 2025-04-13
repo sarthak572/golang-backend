@@ -15,6 +15,7 @@ var (
 	client            *mongo.Client
 	UserCollection    *mongo.Collection
 	ProductCollection *mongo.Collection
+	CartCollection    *mongo.Collection
 )
 
 func Connect() {
@@ -38,6 +39,8 @@ func Connect() {
 	// Initialize collections after client is connected
 	UserCollection = client.Database("general-shop").Collection("users")
 	ProductCollection = client.Database("general-shop").Collection("products")
+	CartCollection = client.Database("general-shop").Collection("carts")
+
 }
 
 func GetClient() *mongo.Client {

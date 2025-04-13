@@ -27,15 +27,14 @@ func AuthMiddleware() gin.HandlerFunc {
 		}
 
 		// Validate token
-		email, err := utils.ValidateJWT(tokenParts[1])
+		claims, err := utils.ValidateJWT(tokenParts[1])
 		if err != nil {
 			c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid or expired token"})
 			c.Abort()
 			return
 		}
-
-		// Set email in context
-		c.Set("userEmail", email)
+		c.Set("userID", claims.UserID)
+		c.Set("userEmail", claims.Email)
 		c.Next()
 	}
 }
